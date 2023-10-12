@@ -10,13 +10,43 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
+import Card from '@mui/material/Card';
+import { Button, CardContent, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 
-const Details = ({ repo, barJson, boxChartJson, bulletChartJson, swarmPlotJson }: any) => (
+const Details = ({ repo, barJson, boxChartJson, bulletChartJson, swarmPlotJson }: any) => {
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  
+  return (
   <>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+    >
+      <DialogTitle>JSON</DialogTitle>
+      <DialogContent>
+        {JSON.stringify(repo)}
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose}>Close</Button>
+      </DialogActions>
+    </Dialog>
+
     <div className={styles.description}>
-      <textarea value={JSON.stringify(repo)} readOnly/>
+      <Button variant="outlined" onClick={handleClickOpen}>
+          Show JSON
+      </Button>
     </div>
 
     <div className={styles.card}>
@@ -68,6 +98,6 @@ const Details = ({ repo, barJson, boxChartJson, bulletChartJson, swarmPlotJson }
       </AccordionDetails>
     </Accordion>
   </>
-)
+)}
 
 export default Details;
