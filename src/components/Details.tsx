@@ -13,22 +13,22 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Suspense } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 
-const Details = ({ repo }: any) => (
+const Details = ({ repo, barJson, boxChartJson, bulletChartJson, swarmPlotJson }: any) => (
   <>
     <div className={styles.description}>
       <textarea value={JSON.stringify(repo)} readOnly/>
     </div>
 
     <div className={styles.card}>
-      <BoxChart />
+      <BoxChart data={boxChartJson} />
     </div>
 
     <div className={styles.card}>
-      <BulletChart />
+      <BulletChart data={bulletChartJson} />
     </div>
 
     <div className={styles.card}>
-      <SwarmPlot />
+      <SwarmPlot data={swarmPlotJson} />
     </div>
 
     <Accordion style={{width: '100%'}} TransitionProps={{ unmountOnExit: true }}>
@@ -42,7 +42,7 @@ const Details = ({ repo }: any) => (
       <AccordionDetails>
         <div className={styles.card}>
           <Suspense fallback={<CircularProgress />}>
-            <Bar />
+            <Bar data={barJson} />
           </Suspense>
         </div>
       </AccordionDetails>
@@ -62,7 +62,7 @@ const Details = ({ repo }: any) => (
         </Typography>
         <div className={styles.card}>
           <Suspense fallback={<CircularProgress />}>
-            <Bar />
+            <Bar data={barJson} />
           </Suspense>
         </div>
       </AccordionDetails>

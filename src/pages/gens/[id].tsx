@@ -1,5 +1,10 @@
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
 
+import barJson from './bar.json';
+import boxChartJson from './box-chart.json';
+import bulletChartJson from './bullet-chart.json';
+import swarmPlotJson from './swarm-plot.json';
+
 import dynamic from "next/dynamic";
 
 const DynamicDetails = dynamic(()=> import ('@/components/Details'), {ssr:false});
@@ -14,7 +19,13 @@ export default function Gene({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <main>
-      <DynamicDetails repo={repo} />
+      <DynamicDetails
+        repo={repo}
+        barJson={barJson}
+        boxChartJson={boxChartJson}
+        bulletChartJson={bulletChartJson}
+        swarmPlotJson={swarmPlotJson}
+      />
     </main>
   );
 }
